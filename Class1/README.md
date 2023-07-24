@@ -32,4 +32,5 @@ The very basic difference is that Production Build has ugly, minified(compressed
 ## What is async and defer?
 **Async** - As soon as scripts are encountered,scripts are fetched from the network along with HTML parsing and only when the complete script is fetched from the network, THE HTML PARSING STOPS AND SCRIPT IS EXECUTED and AFTER SCRIPT EXECUTED HTML PARSING CONTINUES\
 **Defer** - The HTML continues parsing and script fetched side by side from the network ONLY AFTER COMPLETE HTML PARSED THE SCRIPT IS EXECUTED\
-![Alt text](async vs defer.png)
+![async vs defer](https://github.com/vineetkhemnani/namaste-react/assets/78949423/bfc20dce-09e5-4aff-b5c1-3c867e2c70d7)
+
