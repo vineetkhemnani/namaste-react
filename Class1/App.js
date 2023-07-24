@@ -19,6 +19,7 @@ const container = React.createElement(
   {
     id: 'container',
   },
+  // heading,heading2 are react elements or simply children
   [heading, heading2]
 )
 
