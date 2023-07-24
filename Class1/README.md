@@ -32,4 +32,4 @@ The very basic difference is that Production Build has ugly, minified(compressed
 ## What is async and defer?
 **Async** - As soon as scripts are encountered,scripts are fetched from the network along with HTML parsing and only when the complete script is fetched from the network, THE HTML PARSING STOPS AND SCRIPT IS EXECUTED and AFTER SCRIPT EXECUTED HTML PARSING CONTINUES
 **Defer** - The HTML continues parsing and script fetched side by side from the network ONLY AFTER COMPLETE HTML PARSED THE SCRIPT IS EXECUTED
-![Alt text](Class1\async vs defer.png)
+![Alt text](\async vs defer.png)
