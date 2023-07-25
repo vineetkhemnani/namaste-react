@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
 // createElement creates a React object
 const heading = React.createElement(
   'h1',
