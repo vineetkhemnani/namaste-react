@@ -21,4 +21,5 @@ locks the dependencies to a current version to prevent blunder
 - it also maintains a hash of the dependency("integrity") (to check the exact same version is on production or not)
 
 ## node_modules
-database for npm installs
+database for npm installs\
+**WE do not put node_modules in github as our package-lock.json contains sufficient information to create node_modules**
