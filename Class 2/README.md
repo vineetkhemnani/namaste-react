@@ -24,7 +24,7 @@ locks the dependencies to a current version to prevent blunder
 ## node_modules
 database for npm installs\
 **WE do not put node_modules in github as our package-lock.json contains sufficient information to create node_modules**
--We can generate node_modules on our server
+- We can generate node_modules on our server
 
 Using CDN is not a good way, coz React may keep getting updated But **packages** make sure of updates
 
