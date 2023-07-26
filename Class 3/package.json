@@ -1,16 +1,17 @@
 {
-  "name": "class-2",
+  "name": "class-3",
   "version": "1.0.0",
   "description": "In the original create-react-app, the bundler is **WEBPACK**/\r Other bundlers include parcel, vite etc",
-  "main": "App.js",
   "scripts": {
-    "start":"parcel index.html",
+    "start": "parcel index.html",
     "build": "parcel build index.html",
     "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "parcel": "^2.9.3",
     "process": "^0.11.10"
   },
