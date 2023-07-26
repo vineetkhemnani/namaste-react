@@ -53,3 +53,143 @@ Now React knows that the element with key '2014' is the new one, and the element
 
 ## JSX
 - JSX is not HTML inside JavaScript but it is **HTML-like syntax**
+- **Babel understands JSX**
+- JSX uses React.createElement behind the scenes usingg **BABEL**
+- JSX => React.createElement => Object => HTML(DOM) 
+**Babel comes along with parcel**
+- **There is one more package-lock.json inside node_modules**
+
+## React Component
+- Class Based Component (Old)
+- Functional Component - MOSTLY USED
+
+- **Functional component** is a normal javascript function that returns a piece of JSX or a react element or a component
+- Conventionally React components name **Start with a capital letter** *(but we can write in lowercase too)*
+```
+const HeaderComponent = () => {
+  return <h1>Namaste React from functional component</h1>
+}
+```
+## Multiple elements in a component
+We can write with/without return statement
+```
+const HeaderComponent1 = () => {
+  return (
+    <div>
+      <h1>Namaste React from functional component</h1>
+      <h2>This is a h2 tag</h2>
+    </div>
+    
+  )
+}
+```
+or
+```
+const HeaderComponent2 = () => {
+  (
+    <div>
+      <h1>Namaste React from functional component</h1>
+      <h2>This is a h2 tag</h2>
+    </div>
+    
+  )
+}
+```
+## Rendering a functional component
+```
+const HeaderComponent = () => {
+  return <h1>Namaste React from functional component</h1>
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<HeaderComponent/>);
+```
+
+## React Element vs React Component
+- This is a react element
+```
+const heading2 = (
+  <h1 id="title" key="h2">
+    Namaste React
+    </h1>
+);
+```
+- This is a REACT COMPONENT
+```
+const HeaderComponent1 = () => {
+  return (
+    <div>
+      <h1>Namaste React from functional component</h1>
+      <h2>This is a h2 tag</h2>
+    </div>
+  )
+}
+```
+
+## Using REACT ELEMENT INSIDE REACT COMPONENT
+```
+// React element
+const heading1 = (
+  <h1 id="title" key="h2">
+    Namaste React
+    </h1>
+);
+
+// React Component
+const HeaderComponent1 = () => {
+  return (
+    <div>
+      {heading1}
+      <h2>Namaste React from functional component</h2>
+      <h2>This is a h2 tag</h2>
+    </div>
+    
+  )
+}
+```
+
+## Using Component inside Component
+```
+// Component to be used inside
+const Title = () => (
+  <h1 id="title" key="h2">
+    Namaste React
+    </h1>
+);
+
+// React Component
+const HeaderComponent1 = () => {
+  return (
+    <div>
+      <Title/>
+      <h2>Namaste React from functional component</h2>
+      <h2>This is a h2 tag</h2>
+    </div>
+    
+  )
+}
+```
+**ABOVE IS KNOWN AS COMPONENT COMPOSITION**
+**COMPONENT INSIDE COMPONENT**
+or simply
+```
+// Component to be used inside
+const Title = () => (
+  <h1 id="title" key="h2">
+    Namaste React
+    </h1>
+);
+
+// React Component
+const HeaderComponent1 = () => {
+  return (
+    <div>
+      {Title()}
+      <h2>Namaste React from functional component</h2>
+      <h2>This is a h2 tag</h2>
+    </div>
+    
+  )
+}
+```
+- **ANY PIECE OF JAVASCRIPT CODE CAN BE WRITTEN IN {}**
+- JSX is secure. It **sanitizes data** in {} and XSS(Cross Site Scripting) cant happen
