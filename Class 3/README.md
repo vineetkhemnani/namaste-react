@@ -169,7 +169,7 @@ const HeaderComponent1 = () => {
 }
 ```
 **ABOVE IS KNOWN AS COMPONENT COMPOSITION**
-**COMPONENT INSIDE COMPONENT**
+**(COMPONENT INSIDE COMPONENT)**
 or simply
 ```
 // Component to be used inside
