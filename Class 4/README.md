@@ -104,7 +104,52 @@ const RestaurantCard = ({restaurant}) => {
 ```
 
 ## Destructing object in parameters (props) and calling all objects dynamically
+```
+const RestaurantCard = ({ name, cuisines, avgRating, cloudinaryImageId }) => {
+  // console.log(restaurant.info)
+  return (
+    <div className="card">
+      <img
+        src={
+          'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/' +
+          cloudinaryImageId
+        }
+        alt=""
+      />
+      <h2>{name}</h2>
+      <h3>{cuisines.join(', ')}</h3>
+      <h4>{avgRating} stars</h4>
+    </div>
+  )
+}
 
+// props- properties
+const Body = () => {
+  return (
+    <div className="restaurant-list">
+      {/* RestaurantCard(restaurants[0]) */}
+      {restaurants.map((restaurant) => {
+        return <RestaurantCard {...restaurant.info} key={restaurant.info.id} />
+      })}
+    </div>
+  )
+}
+```
 
 ## Virtual DOM
 - Representation of the DOM in our code
+**Why do we need virtual DOM in React?**\
+- To make React faster, we need a virtual DOM
+Reconciliation - React uses an diff algorithm to differentiate one tree from another and it determines what needs to change in UI and re-renders only the small part of the UI
+- Suppose a new element(with same tag) is added to the tree and all the existing as well new element has a key prop (which is unique), React will re-render only the new element and not the existing rendered elements
+- React re-renders only the specific portion found by the diff algorithm
+- React wont know the difference between the elements without the **key prop**
+
+## React Fiber
+- New Reconciliation Engine in React 16
+- For Diff
+
+## Why not to use index as a key?
+- no key <<<< index key << unique key
+- index key => last resort
+- no key => not recommended

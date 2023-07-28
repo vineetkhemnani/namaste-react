@@ -16,8 +16,8 @@ import ReactDOM from 'react-dom/client'
  * Footer
  *    - Links
  *    - Copyright
- *  
- * 
+ *
+ *
  */
 // React element
 const Title = () => (
@@ -35,9 +35,9 @@ const Title = () => (
 // Composing Components
 const Header = () => {
   return (
-    <div className='header'>
+    <div className="header">
       <Title />
-      <div className='nav-items'>
+      <div className="nav-items">
         <ul>
           <li>Home</li>
           <li>About</li>
@@ -46,8 +46,8 @@ const Header = () => {
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
 // const burgerKing = {
 //   name: 'Burger King',
@@ -795,10 +795,8 @@ const restaurants = [
   },
 ]
 
-
-const RestaurantCard = ({restaurant}) => {
+const RestaurantCard = ({ name, cuisines, avgRating, cloudinaryImageId }) => {
   // console.log(restaurant.info)
-  const {name, cuisines,avgRating,cloudinaryImageId} = restaurant.info;
   return (
     <div className="card">
       <img
@@ -820,44 +818,38 @@ const Body = () => {
   return (
     <div className="restaurant-list">
       {/* RestaurantCard(restaurants[0]) */}
-      <RestaurantCard restaurant={restaurants[0]} />
-      <RestaurantCard restaurant={restaurants[1]} />
-      <RestaurantCard restaurant={restaurants[2]} />
-      <RestaurantCard restaurant={restaurants[3]} />
-      <RestaurantCard restaurant={restaurants[4]} />
-      <RestaurantCard restaurant={restaurants[5]} />
-      <RestaurantCard restaurant={restaurants[6]} />
-      <RestaurantCard restaurant={restaurants[7]} />
-      <RestaurantCard restaurant={restaurants[8]} />
+      {restaurants.map((restaurant) => {
+        return <RestaurantCard {...restaurant.info} key={restaurant.info.id} />
+      })}
     </div>
   )
 }
 
 const Footer = () => {
-  return (
-    <h4>Footer</h4>
-  )
+  return <h4>Footer</h4>
 }
 
 const AppLayout = () => {
- return (
-      <>
-        <Header />
-        <Body />
-        <Footer />
-      </>
- )
-};
+  return (
+    <>
+      <Header />
+      <Body />
+      <Footer />
+    </>
+  )
+}
 
 const jsx = (
-  <div style={{
-    backgroundColor: "red",
-  }}>
-  <h1>JSX</h1>
-  <h1>Second JSX</h1>
+  <div
+    style={{
+      backgroundColor: 'red',
+    }}
+  >
+    <h1>JSX</h1>
+    <h1>Second JSX</h1>
   </div>
 )
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
-root.render(<AppLayout/>)
+root.render(<AppLayout />)
