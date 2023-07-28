@@ -63,5 +63,48 @@ const Body = () => {
 ```
 Now these will be available in RestaurantCard component as a **prop** and can be accessed
 ```
-
+const RestaurantCard = (props) => {
+  console.log(props.restaurant.info)
+  return (
+    <div className="card">
+      <img
+        src={
+          'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/' +
+          props.restaurant.info?.cloudinaryImageId
+        }
+        alt=""
+      />
+      <h2>{props.restaurant.info?.name}</h2>
+      <h3>{props.restaurant.info?.cuisines.join(', ')}</h3>
+      <h4>{props.restaurant.info?.avgRating} stars</h4>
+    </div>
+  )
+}
 ```
+## Destructuring objects inside props
+```
+const RestaurantCard = ({restaurant}) => {
+  // console.log(restaurant.info)
+  const {name, cuisines,avgRating,cloudinaryImageId} = restaurant.info;
+  return (
+    <div className="card">
+      <img
+        src={
+          'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/' +
+          cloudinaryImageId
+        }
+        alt=""
+      />
+      <h2>{name}</h2>
+      <h3>{cuisines.join(', ')}</h3>
+      <h4>{avgRating} stars</h4>
+    </div>
+  )
+}
+```
+
+## Destructing object in parameters (props) and calling all objects dynamically
+
+
+## Virtual DOM
+- Representation of the DOM in our code
