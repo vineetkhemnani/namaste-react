@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Body from './components/Body.js';
 import Footer from './components/Footer.js';
 
+
 // named import
 // import { Title } from './components/Header';
 /**
@@ -26,14 +27,6 @@ import Footer from './components/Footer.js';
  *
  *
  */
-
-
-// const burgerKing = {
-//   name: 'Burger King',
-//   image: 'https://b.zmtcdn.com/data/pictures/4/19193204/c9fbbf2eed4d4ab83ce63b114e76b57f.jpg',
-//   cuisines: ["Burger", "American"],
-//   rating: "4.2"
-// }
 
 
 
