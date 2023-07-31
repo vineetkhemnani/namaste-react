@@ -33,3 +33,19 @@ useEffect((callback function)=>{
 ## Conditional Rendering
 If restaurant is empty => shimmer UI
 if restaurant has data => actual data UI
+
+## JavaScript inside {}
+- only JavaScript expressions work
+```
+{
+let a = 10;
+console.log(a);
+}
+```
+- Above doesnt work as not a valid javascript expression
+- above are statements
+
+```
+((a=10), console.log(a))
+```
+-We can write this to make it work

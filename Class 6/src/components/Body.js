@@ -5,12 +5,13 @@ import Shimmer from "./Shimmer";
 
 function filterData(searchText, restaurants){
 const filterData = restaurants.filter((restaurant)=>
-    restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
+    restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
 );
     return filterData;
 }
 
 const Body = () => {
+  
   const [allRestaurants, setAllRestaurants] = useState([])
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   // create local state variable in React
@@ -38,8 +39,12 @@ const Body = () => {
     )
   }
   // console.log("render");
-  // 
-  return (allRestaurants.length === 0) ? <Shimmer /> : (
+  // not render component => Early return
+  if(!allRestaurants) return null;
+
+  if(filteredRestaurants?.length === 0)
+    return <h1>No restaurants match your filter</h1>
+  return (allRestaurants?.length === 0) ? <Shimmer /> : (
     <>
       <div className="search-container">
         <input
