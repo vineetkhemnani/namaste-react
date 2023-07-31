@@ -5,7 +5,7 @@ import Shimmer from "./Shimmer";
 
 function filterData(searchText, restaurants){
 const filterData = restaurants.filter((restaurant)=>
-    restaurant.info.name.includes(searchText)
+    restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
 );
     return filterData;
 }
