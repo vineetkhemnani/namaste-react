@@ -49,3 +49,10 @@ console.log(a);
 ((a=10), console.log(a))
 ```
 -We can write this to make it work
+
+## Fetch API
+Although we have the Response object now, we can't access the data inside it right away. The response object returned by await fetch supports multiple functions for different data formats, which include:
+
+- response.json(): Returns data as a JSON Object.
+- response.text(): Returns data in raw text.
+- response.formData(): Returns data as FormData.
