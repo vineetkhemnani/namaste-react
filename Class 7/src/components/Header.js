@@ -1,9 +1,10 @@
 import { useState } from "react";
+import Logo from "../assets/img/the-eatery-logo.png"
 const Title = () => (
   <a href="/">
     <img
       className="logo"
-      src="https://cdn.freebiesupply.com/logos/large/2x/the-eatery-logo-png-transparent.png"
+      src={Logo}
       alt=""
     />
   </a>
