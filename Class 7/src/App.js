@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import Body from './components/Body.js';
 import Footer from './components/Footer.js';
-
+import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+import About from './components/About';
 
 // named import
 // import { Title } from './components/Header';
@@ -46,17 +47,20 @@ const AppLayout = () => {
   )
 }
 
-const jsx = (
-  <div
-    style={{
-      backgroundColor: 'red',
-    }}
-  >
-    <h1>JSX</h1>
-    <h1>Second JSX</h1>
-  </div>
-)
+const appRouter = createBrowserRouter([
+  // place where we define what happens when load /path
+  {
+    path: "/",
+    element: <AppLayout/>
+  },
+  {
+    path: "/About",
+    element: <About/>
+  },
+
+]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
-root.render(<AppLayout />)
+root.render(<RouterProvider router={appRouter}/>);
