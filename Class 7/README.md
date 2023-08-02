@@ -79,3 +79,27 @@ const Error = () => {
 export default Error
 ```
 - **err** is an object that contains all the data about the error
+
+## Single Page Application
+- only one page and data isnt fetched again and again for each individual page from the network
+## Client Side Routing and Server side Routing
+We implement client side routing in React as all the components are already present in our local code
+- According to route, we load a different component
+
+## Link component
+```import { Link } from "react-router-dom";```
+- used for setting up single page application
+Instead of anchor tag,
+```
+<li>
+            <a href="/About">About</a>
+          </li>
+```
+we use **Link**
+```
+<li>
+            <Link to="/About">About</Link>
+          </li>
+```
+- Behind the scenes, Link component uses anchor tag
+- react-router-dom converts the Link component into an anchor tag and also keeping a track of all the Links

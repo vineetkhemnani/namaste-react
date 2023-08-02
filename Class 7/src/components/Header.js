@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Logo from "../assets/img/the-eatery-logo.png"
+import Logo from "../assets/img/the-eatery-logo.png";
+import { Link } from 'react-router-dom';
+
 const Title = () => (
   <a href="/">
     <img
@@ -21,13 +23,21 @@ const Header = () => {
       <Title />
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/About">About</Link>
+          </li>
           <li>Contact</li>
           <li>Cart</li>
         </ul>
       </div>
-      {isLoggedIn ?  (<button onClick={() => setIsLoggedIn(false)} >Logout</button> ): <button onClick={()=> setIsLoggedIn(true)}>Login</button>}
+      {isLoggedIn ? (
+        <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+      ) : (
+        <button onClick={() => setIsLoggedIn(true)}>Login</button>
+      )}
     </div>
   )
 };
