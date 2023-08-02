@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
 // default import
 import Header from './components/Header';
 import Body from './components/Body.js';
 import Footer from './components/Footer.js';
-import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+import { createBrowserRouter,RouterProvider, Outlet } from 'react-router-dom';
 import About from './components/About';
 import Error from './components/Error';
-
+import Contact from './components/Contact';
 // named import
 // import { Title } from './components/Header';
 /**
@@ -42,7 +42,9 @@ const AppLayout = () => {
   return (
     <>
       <Header />
-      <Body />
+      {/* Place where I want to render random things ex:- Body, About , Contact us */}
+      {/* {Outlet} */}
+      <Outlet/>
       <Footer />
     </>
   )
@@ -51,17 +53,25 @@ const AppLayout = () => {
 const appRouter = createBrowserRouter([
   // place where we define what happens when load /path
   {
-    path: "/",
-    element: <AppLayout/>,
-    errorElement: <Error/>
+    path: '/',
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: '/About',
+        element: <About />,
+      },
+      {
+        path: '/',
+        element: <Body />,
+      },
+      {
+        path: '/Contact',
+        element: <Contact />,
+      },
+    ],
   },
-  {
-    path: "/About",
-    element: <About/>
-  },
-
-
-]);
+])
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'))

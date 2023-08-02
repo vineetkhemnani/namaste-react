@@ -103,3 +103,44 @@ we use **Link**
 ```
 - Behind the scenes, Link component uses anchor tag
 - react-router-dom converts the Link component into an anchor tag and also keeping a track of all the Links
+
+## Nesting Components and Outlets
+- We want header and footer to be consistent
+- The Outlet will change according to the route
+- All the children will go into the outlet
+- Children can be defined inside the createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout/>,
+    errorElement: <Error/>,
+    children: [
+      {
+        
+      }
+    ]
+  }
+])
+```
+const appRouter = createBrowserRouter([
+  // place where we define what happens when load /path
+  {
+    path: '/',
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: '/About',
+        element: <About />,
+      },
+      {
+        path: '/',
+        element: <Body />,
+      },
+      {
+        path: '/Contact',
+        element: <Contact />,
+      },
+    ],
+  },
+])
+```
