@@ -51,3 +51,13 @@ const appRouter = createBrowserRouter([
 - We are rendering <AppLayout/> always but we need to render dynamically
 - pass appRouter() to render
 ```root.render(<RouterProvider router={appRouter}/>);```
+
+## Handling errors
+- define an error component as an errorElement inside createBrowserRouter
+```
+{
+    path: "/",
+    element: <AppLayout/>,
+    errorElement: <Error/>
+  }
+```
