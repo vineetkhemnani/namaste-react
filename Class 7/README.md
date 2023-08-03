@@ -108,20 +108,10 @@ we use **Link**
 - The Outlet will change according to the route (Outlet is a component provided by react-router-dom)
 - All the children will go into the outlet
 - Outlet acts as the placeholder
-- Children can be defined inside the createBrowserRouter([
-  {
-    path: "/",
-    element: <AppLayout/>,
-    errorElement: <Error/>,
-    children: [
-      {
-        
-      }
-    ]
-  }
-])
+- Children can be defined inside the createBrowserRouter([])
 
-```const appRouter = createBrowserRouter([
+```
+const appRouter = createBrowserRouter([
   // place where we define what happens when load /path
   {
     path: '/',
@@ -142,11 +132,13 @@ we use **Link**
       },
     ],
   },
-])```
+])
+```
 
 ## Dynamic Segments/Dynamic URL params
 - React-router-dom gives us this hook known as **useParams()** which helps us read from the url
 ```import { useParams } from "react-router-dom";```
+
 ```
 const RestaurantMenu = () => {
     const params = useParams();
