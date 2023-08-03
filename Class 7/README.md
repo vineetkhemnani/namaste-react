@@ -62,8 +62,7 @@ const appRouter = createBrowserRouter([
   }
 ```
 ### useRouteError hook
-```import { useRouteError } from "react-router-dom"
-```
+```import { useRouteError } from "react-router-dom"```
 ```
 import { useRouteError } from "react-router-dom"
 const Error = () => {
@@ -106,8 +105,9 @@ we use **Link**
 
 ## Nesting Components and Outlets
 - We want header and footer to be consistent
-- The Outlet will change according to the route
+- The Outlet will change according to the route (Outlet is a component provided by react-router-dom)
 - All the children will go into the outlet
+- Outlet acts as the placeholder
 - Children can be defined inside the createBrowserRouter([
   {
     path: "/",
@@ -120,8 +120,8 @@ we use **Link**
     ]
   }
 ])
-```
-const appRouter = createBrowserRouter([
+
+```const appRouter = createBrowserRouter([
   // place where we define what happens when load /path
   {
     path: '/',
@@ -142,5 +142,21 @@ const appRouter = createBrowserRouter([
       },
     ],
   },
-])
+])```
+
+## Dynamic Segments/Dynamic URL params
+- React-router-dom gives us this hook known as **useParams()** which helps us read from the url
+```import { useParams } from "react-router-dom";```
+```
+const RestaurantMenu = () => {
+    const params = useParams();
+    // console.log(params);
+    // const {id} = params;
+  return (
+    <div>
+        <h1>Restaurant id: {id}</h1>
+        <h2>restaurant name</h2>
+    </div>
+  )
+}
 ```
