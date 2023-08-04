@@ -152,3 +152,10 @@ const RestaurantMenu = () => {
   )
 }
 ```
+
+## Component structure helps in keeping our code:-
+- Cleaner
+- Modular
+- Maintainable
+- Reusable
+- Testable
