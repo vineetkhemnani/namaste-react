@@ -42,3 +42,11 @@
     margin: 10px;
     flex-wrap: wrap;
 }
+
+.menu {
+    display: flex;
+}
+
+#restroImg {
+    width:400px;
+}

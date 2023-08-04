@@ -136,7 +136,7 @@ const appRouter = createBrowserRouter([
 ```
 
 ## Dynamic Segments/Dynamic URL params
-- React-router-dom gives us this hook known as **useParams()** which helps us read from the url
+- React-router-dom gives us this hook known as **useParams()** which helps us read from the url\
 ```import { useParams } from "react-router-dom";```
 
 ```
