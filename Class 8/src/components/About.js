@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
-
+import ProfileFunctionalComponent from './Profile';
+import ProfileClassComponent from './ProfileClass';
 const About = () => {
     return (
         <div>
@@ -7,7 +8,9 @@ const About = () => {
             <p>
                 This project is a part of Namaste React Course  by Akshay Saini
             </p>
-            <Outlet/>
+            {/* <Outlet/> */}
+            <ProfileFunctionalComponent name={"Vineet"}/>
+            <ProfileClassComponent name={"VineetClass"}/>
         </div>
     );
 };
