@@ -47,7 +47,7 @@ constructor(props){
     }
   }
 ```
-Rendering\
+Rendering
 ```
 render() {
     return (
@@ -107,4 +107,50 @@ class Profile extends React.Component {
 - **NEVER MUTATE STATE DIRECTLY**
 - **we cant do** ```this.state.count=1```
 
+#### Setting multiples state variables
+```
+class Profile extends React.Component {
+  constructor(props){
+    super(props);
+    // Create state
+    this.state = {
+      count: 0,
+      count2: 0,
+    }
+  }
+  render() {
+    return (
+        <div>
+            <h1>Profile Class Component</h1>
+            <h3>Name: {this.props.name}</h3>
+            <h4>Count1: {this.state.count}</h4>
+            <h4>Count2: {this.state.count2}</h4>
+            <button onClick={()=>{
+              // we do not mutate state directly
+              // we need to use a modified object and pass it in setState() function
+              this.setState(
+              {
+                count: 1,
+                count2: 1,
+              }
+            )}}>Click me</button>
+        </div>
+    )
+  }
+}
+```
+
+## componentDidMount() in class-based components
+- Constructor => render() => componentDidMount()
+- These three methods are called **lifecycle methods** in class based components
+- First constructor is called, then component renders, then componentDidMount is called
+- Best place to make an **API call** is **componentDidMount()**
+
+## Nested Class-components
+- If there is a parent class-component and a child class-component
+- First the parent constructor is called, then parent render() is called which contains the child class component
+- Then the child contructor is called, then child render(), then child componentDidMount() and at last parent
+componentDidMount() is called
+- **Parent constructor => Parent render => Child constructor => Child render => Child componentDidMount() => 
+ParentDidMount()**
 
