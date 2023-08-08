@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import ProfileFunctionalComponent from './Profile';
 import ProfileClassComponent from './ProfileClass';
+
 const About = () => {
     return (
         <div>

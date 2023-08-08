@@ -1,31 +1,38 @@
 import React from 'react'
 
 class Profile extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(props) {
+    super(props)
     // Create state
     this.state = {
       count: 0,
       count2: 0,
+      userInfo: {
+        name: 'Dummy name',
+        login: 'Dummy login',
+      },
     }
   }
+  async componentDidMount() {
+    // API calls
+    const data = await fetch('https://api.github.com/users/vineetkhemnani')
+    const json = await data.json();
+    this.setState({
+      userInfo: json,
+    })
+  }
+  componentDidUpdate(prevProps, prevState) {
+    // if(this.state.count!==prevState.count)
+  }
+
   render() {
     return (
-        <div>
-            <h1>Profile Class Component</h1>
-            <h3>Name: {this.props.name}</h3>
-            <h4>Count1: {this.state.count}</h4>
-            <h4>Count2: {this.state.count2}</h4>
-            <button onClick={()=>{
-              // we do not mutate state directly
-              // we need to use a modified object and pass it in setState() function
-              this.setState(
-              {
-                count: 1,
-                count2: 1,
-              }
-            )}}>Click me</button>
-        </div>
+      <div>
+        <h1>Profile Class Component</h1>
+        <img src={this.state.userInfo?.avatar_url} alt="" />
+        <h3>Name: {this.state.userInfo?.name}</h3>
+        <h3>Username: {this.state.userInfo?.login}</h3>
+      </div>
     )
   }
 }
