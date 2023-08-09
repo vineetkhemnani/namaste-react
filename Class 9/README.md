@@ -91,3 +91,6 @@ import { Suspense } from 'react';
         ),
       },
 ```
+# NEVER EVER DYNAMICALLY LOAD A COMPONENT INSIDE ANOTHER COMPONENT
+- because it will be lazy load after every render cycle
+- Lazy load after import only
