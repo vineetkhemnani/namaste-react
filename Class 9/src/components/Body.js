@@ -28,11 +28,11 @@ const Body = () => {
     console.log(json);
     setAllRestaurants(
       // optional chaining 
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     )
     setFilteredRestaurants(
       // optional chaining 
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     )
   }
   // console.log("render");
