@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
+import useOnline from "../utils/useOnline";
+// import useOnline from "../utils/useOnline";
 const Body = () => {
   
   const [allRestaurants, setAllRestaurants] = useState([])
@@ -36,6 +38,11 @@ const Body = () => {
   // console.log("render");
   // not render component => Early return
   if(!allRestaurants) return null;
+
+  const isOnline = useOnline();
+  if(!isOnline) {
+    return <h1>🔴 Offline, please check your internet connection!!</h1>;
+  }
 
   // if(filteredRestaurants?.length === 0)
   //   return <h1>No restaurants match your filter</h1>
