@@ -39,10 +39,10 @@ const Body = () => {
   // not render component => Early return
   if(!allRestaurants) return null;
 
-  const isOnline = useOnline();
-  if(!isOnline) {
-    return <h1>🔴 Offline, please check your internet connection!!</h1>;
-  }
+  // const isOnline = useOnline();
+  // if(!isOnline) {
+  //   return <h1>🔴 Offline, please check your internet connection!!</h1>;
+  // }
 
   // if(filteredRestaurants?.length === 0)
   //   return <h1>No restaurants match your filter</h1>
