@@ -1,96 +1,72 @@
-# Custom Hooks
-- create custom hooks to increase
-  1. readability
-  2. maintainability
-  3. modularity
-  4. reusability
-- The hook filename should start with "use"
+# Styling components
+1. using style.css/index.css 
+2. using inline styles - writing an object inside javascript paranthesis
+```
+<style = {
+  {backgroundColor: "red"}
+}></style>
+```
+- **Avoid writing inline style as the browser has to perform heavier tasks to perform inline styles**
+3. SCSS/SASS
+4. Material UI - contains pre-built components, BaseUI, AntDesign, ChakraUI
+**Pros**
+- Makes the development process faster and easier
+- These libraries provide with consistent UI, reusable components
+- Takes care of responsiveness
+- We can use multiple frameworks but it is not a good practice to do so
+**Cons**
+- Lose control over how our UI looks
+- Bundle size increases
+5. Styled components - Writing CSS inside javascript. Passing props
+**Cons**
+- Writing styled components has a learning curve
+6. Tailwind CSS framework
 
-## Implement useOnline() custom hook
+## Tailwind CSS
+- CSS on the go
+- reusability
+- less bundle size (minimal CSS)
+- Flexible UI (Customizable)
+- As soon as we include tailwind CSS, the default behaviour of tags changed
+- Tailwind CSS says that write CSS from the starting as its way
+- Tailwind CSS overwrites everything
+- Every style we write will be a new className
 ```
-import {useState, useEffect} from 'react';
-const useOnline = () => {
-  const [isOnline, setIsOnline] = useState(true);
-  useEffect(()=>{
-    window.addEventListener('online',()=>{
-        setIsOnline(true);
-    })
-    window.addEventListener('offline',()=>{
-        setIsOnline(false);
-    })
-  },[]);
-  return isOnline;
-}
-export default useOnline
+npm install -D tailwindcss postcss
+npx tailwindcss init
 ```
-**In body, conditional rendering**
+- creates a tailwind.config.js file which contains certain configs
+   - content:[] - it will contain what files we need to use tailwind in (what files will be using the tailwind classes)
+   ```content: ['./src/**/*.{html,js,ts,jsx,tsx}'],```
+
+- **PostCSS**- We need to tell parcel that we are using tailwind in our project.\
+We need to configure PostCSS also
+- We use a '.postcssrc' file for this
 ```
-const isOnline = useOnline();
-  if(!isOnline) {
-    return <h1>🔴 Offline, please check your internet connection!!</h1>;
+{
+  "plugins": {
+    "tailwindcss": {}
   }
-```
-## Cleaning up code
-```
-const useOnline = () => {
-  const [isOnline, setIsOnline] = useState(true);
-  useEffect(()=>{
-    const handleOnline = () => {
-      setIsOnline(true);
-    }
-    const handleOffline = () => {
-      setIsOnline(false)
-    }
-    window.addEventListener('online',handleOnline);
-    window.addEventListener('offline',handleOffline);
-    return () => {
-        window.removeEventListener('online', handleOnline);
-        window.removeEventListener('offline', handleOffline);
-    }
-  },[]);
-  return isOnline;
 }
 ```
+- The above tells our bundler to compile the tailwind
+- Remove all CSS from index.css and replace with 
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+@tailwind base; - include all the base classes
+@tailwind components - include all the components classes
+@tailwind utilities - includes all the utilities classes
 
-## Bundlers and one js file
-- Parcel creates only a single js file for all our code
-- This makes our code very slow and is not a good practice for scalable, production ready apps
+**Pros**
+- Easy to debug
+- Less code
+- Less bundle size
+- Faster coding
+- Highly customizable
 
-## Chunking/ Code Splitting/ Dynamic Bundling/ Lazy Loading/ On-Demand Loading/ Dynamic Import
-- Load the component only when it is needed
-- ```import { lazy } from 'react';```
-as a named import
-- ```const Instamart = lazy(()=> import('./components/Instamart'));```
-**imports it as a lazy load component**
-- When we demand load a component/script, React stops loading it altogether 
-- Once it has loaded, it doesnt need to load again as React application is a **Single page application**
-- Upon on demand loading => upon render => React suspends loading
-- React loads it after 27ms until then it shows error
-- To fix this, we use **Suspense**
-import { Suspense } from 'react';
-- React lazy loads/ on demand loads whatever is inside <Suspense></Suspense>
-```
-{
-        path: '/Instamart',
-        element: (
-          <Suspense>
-            <Instamart/>
-          </Suspense>
-        ),
-      },
-```
-- Here the Instamart component lazy loads
-- The <Suspense> takes props which define what will be displayed till we lazy load as **fallback**
-```
-{
-        path: '/Instamart',
-        element: (
-          <Suspense fallback={<Shimmer/>}>
-            <Instamart/>
-          </Suspense>
-        ),
-      },
-```
-# NEVER EVER DYNAMICALLY LOAD A COMPONENT INSIDE ANOTHER COMPONENT
-- because it will be lazy load after every render cycle
-- Lazy load after import only
+**Cons**
+- High learning curve - every new developer needs to be taught what is happening
+- Too much classes- compromising code readability

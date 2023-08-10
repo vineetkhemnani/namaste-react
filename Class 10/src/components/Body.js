@@ -28,11 +28,11 @@ const Body = () => {
     console.log(json);
     setAllRestaurants(
       // optional chaining 
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     )
     setFilteredRestaurants(
       // optional chaining 
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     )
   }
   // console.log("render");
@@ -48,10 +48,10 @@ const Body = () => {
   //   return <h1>No restaurants match your filter</h1>
   return (allRestaurants?.length === 0) ? <Shimmer /> : (
     <>
-      <div className="search-container">
+      <div className="search-container p-5">
         <input
           type="text"
-          className="search-input"
+          className=" shadow w-72 outline outline-1 rounded focus:outline-blue-700 focus:outline-2 m-2 p-2"
           placeholder="Search"
           value={searchText}
           onChange={(e) => {
@@ -59,7 +59,7 @@ const Body = () => {
           }}
         />
         <button
-          className="search-btn"
+          className="search-btn p-2 m-2 bg-blue-300 rounded-md shadow hover:bg-blue-400"
           onClick={() => {
             // need to filter the data
             const data = filterData(searchText, allRestaurants)
@@ -70,7 +70,7 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="restaurant-list">
+      <div className="flex flex-wrap justify-center">
         {/* RestaurantCard(restaurants[0]) */}
         {filteredRestaurants.map((restaurant) => {
           return (
