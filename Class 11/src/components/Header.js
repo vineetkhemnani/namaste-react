@@ -1,27 +1,23 @@
-import { useState, useContext } from 'react'
-import Logo from "../assets/img/the-eatery-logo.png";
-import { Link } from 'react-router-dom';
-import useOnline from "../utils/useOnline";
-import UserContext from '../utils/userContext';
+import { useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Logo from '../assets/img/the-eatery-logo.png'
+import UserContext from '../utils/userContext'
+import useOnline from '../utils/useOnline'
 
 const Title = () => (
   <a href="/">
-    <img
-      className="h-28 px-2"
-      src={Logo}
-      alt=""
-    />
+    <img className="h-28 px-2" src={Logo} alt="" />
   </a>
-);
+)
 function loggedInUser() {
   // authentication
-  return true;
+  return true
 }
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const isOnline = useOnline();
-  const { user } = useContext(UserContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const isOnline = useOnline()
+  const { user } = useContext(UserContext)
   return (
     <div className="flex justify-between bg-[#c4fbfb] shadow-lg">
       <Title />
@@ -64,5 +60,5 @@ const Header = () => {
       </div>
     </div>
   )
-};
-export default Header;
+}
+export default Header

@@ -80,3 +80,37 @@ const {user} = useContext(UserContext);
 ## useState(), props vs createContext(),useContext()
 - useState(), props are tied to a component
 whereas createContext(), useContext() are like a constant file accessible all across the app
+
+## Using context in class-based components
+- in class-based components in the **render()** function,
+```
+  <UserContext.Consumer>
+      {(value)=>console.log(value)}
+  </UserContext.Consumer>
+```
+- The value holds the value of the UserContext
+for eg.
+```
+  <UserContext.Consumer>
+          {({ user }) => (
+            <h4 className="font-bold text-red-600 text-xl">{user.name}</h4>
+          )}
+  </UserContext.Consumer>
+```
+
+## USing dynamic context
+```
+  <>
+      <UserContext.Provider value={{
+        user: user
+      }}>
+        <Header />
+        {/* Place where I want to render random things ex:- Body, About , Contact us */}
+        {/* {Outlet} */}
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
+  </>
+```
+
+- above passes UserContext to all the components

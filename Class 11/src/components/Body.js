@@ -1,12 +1,14 @@
 import { restaurantList } from "../constants";
 import RestaurantCard from "./restaurantCard";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 // import useOnline from "../utils/useOnline";
+import UserContext from "../utils/userContext";
 const Body = () => {
+  const { user,setUser } = useContext(UserContext);
   
   const [allRestaurants, setAllRestaurants] = useState([])
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -46,7 +48,9 @@ const Body = () => {
 
   // if(filteredRestaurants?.length === 0)
   //   return <h1>No restaurants match your filter</h1>
-  return (allRestaurants?.length === 0) ? <Shimmer /> : (
+  return allRestaurants?.length === 0 ? (
+    <Shimmer />
+  ) : (
     <>
       <div className="search-container p-5">
         <input
@@ -64,11 +68,21 @@ const Body = () => {
             // need to filter the data
             const data = filterData(searchText, allRestaurants)
             // update the state - restaurants
-            setFilteredRestaurants(data);
+            setFilteredRestaurants(data)
           }}
         >
           Search
         </button>
+        <input
+          type="text"
+          value={user.name}
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
+        />
+        <input
+          type="text"
+          value={user.login}
+          onChange={(e) => setUser({ ...user, login: e.target.value })}
+        />
       </div>
       <div className="flex flex-wrap justify-center">
         {/* RestaurantCard(restaurants[0]) */}

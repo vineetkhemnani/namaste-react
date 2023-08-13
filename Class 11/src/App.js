@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 // default import
 import Header from './components/Header';
@@ -11,17 +11,35 @@ import Contact from './components/Contact';
 import RestaurantMenu from './components/RestaurantMenu';
 import Profile from './components/Profile';
 import Shimmer from './components/Shimmer';
+import UserContext from './utils/userContext';
 
 
 const Instamart = lazy(()=> import('./components/Instamart'));
 const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: 'dummyname',
+    login: 'dummylogin'
+  });
+  useEffect(()=>{
+    getUserInfo();
+  },[])
+  async function getUserInfo(){
+    const data = await fetch('https://api.github.com/users/vineetkhemnani');
+    const json = await data.json();
+    setUser(json);
+  }
   return (
     <>
-      <Header />
-      {/* Place where I want to render random things ex:- Body, About , Contact us */}
-      {/* {Outlet} */}
-      <Outlet/>
-      <Footer />
+      <UserContext.Provider value={{
+        user: user,
+        setUser: setUser
+      }}>
+        <Header />
+        {/* Place where I want to render random things ex:- Body, About , Contact us */}
+        {/* {Outlet} */}
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
     </>
   )
 }

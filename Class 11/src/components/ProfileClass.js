@@ -1,4 +1,5 @@
 import React from 'react'
+import UserContext from '../utils/userContext'
 
 class Profile extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class Profile extends React.Component {
   async componentDidMount() {
     // API calls
     const data = await fetch('https://api.github.com/users/vineetkhemnani')
-    const json = await data.json();
+    const json = await data.json()
     this.setState({
       userInfo: json,
     })
@@ -29,6 +30,11 @@ class Profile extends React.Component {
     return (
       <div>
         <h1>Profile Class Component</h1>
+        <UserContext.Consumer>
+          {({ user }) => (
+            <h4 className="font-bold text-red-600 text-xl">{user.name}</h4>
+          )}
+        </UserContext.Consumer>
         <img src={this.state.userInfo?.avatar_url} alt="" />
         <h3>Name: {this.state.userInfo?.name}</h3>
         <h3>Username: {this.state.userInfo?.login}</h3>
