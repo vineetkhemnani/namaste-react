@@ -43,13 +43,25 @@ const Header = () => {
         </ul>
       </div>
       <h1>{isOnline ? '✅' : '🔴'}</h1>
-      <span className='p-10 font-bold text-blue-600'>{user.name}</span>
+      <div>
+        <span className="p-10 font-bold text-blue-600">{user.name}</span>
 
-      {isLoggedIn ? (
-        <button onClick={() => setIsLoggedIn(false)}>Logout</button>
-      ) : (
-        <button onClick={() => setIsLoggedIn(true)}>Login</button>
-      )}
+        {isLoggedIn ? (
+          <button
+            className="bg-gray-400 mt-6 p-3 rounded"
+            onClick={() => setIsLoggedIn(false)}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            className="bg-gray-400 mt-6 mr-3 p-3 rounded"
+            onClick={() => setIsLoggedIn(true)}
+          >
+            Login
+          </button>
+        )}
+      </div>
     </div>
   )
 };
