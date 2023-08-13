@@ -43,3 +43,40 @@ const Instamart = () => {
 Suppose if one is true other can be false
 - The children are controlling the state,
 - If we want to transfer the control of the state to the parent, it is known as **lifting the state up**
+
+## Passing data across components
+Suppose we need a same piece of info all across my app
+- We can use prop drilling
+- We can use localStorage but updating the local storage is a heavy operation
+- We use a central storage provided by react called **react-Context**
+(Some also redux store)
+- ***React context/ Redux store*** - It is like a shared state for all the components in the app or the whole app. Any component can use that data
+- We cant use a global variable instead as React is not tracking it (similar to useState())
+
+## Creating context
+- ```import { createContext } from "react";```
+```
+import { createContext } from "react";
+
+const UserContext = createContext({
+    name: "Dummy name",
+    email: "dummy@gmail.com"
+});
+
+export default UserContext;
+```
+
+- createContext() takes in the data which is to be passed inside the app basically the default value of the object
+
+## Using context
+- ```import { useContext } from "react";
+    import UserContext from '../utils/userContext';```
+
+```
+const {user} = useContext(UserContext);
+```
+- Display in header using {user.name}
+
+## useState(), props vs createContext(),useContext()
+- useState(), props are tied to a component
+whereas createContext(), useContext() are like a constant file accessible all across the app
