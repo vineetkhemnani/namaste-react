@@ -114,3 +114,12 @@ for eg.
 ```
 
 - above passes UserContext to all the components
+
+## Displaying context name in React dev tools
+use 
+```
+UserContext.displayName = "UserContext"
+```
+after creating UserContext
+
+**the UI and Data layer work parallely and independently and reconciliation happens in the UI layer (the virtual DOM) and context does not care about lazy loading etc**
