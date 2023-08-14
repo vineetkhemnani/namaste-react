@@ -73,7 +73,7 @@ const Body = () => {
         >
           Search
         </button>
-        <input
+        {/* <input
           type="text"
           value={user.name}
           onChange={(e) => setUser({ ...user, name: e.target.value })}
@@ -82,7 +82,7 @@ const Body = () => {
           type="text"
           value={user.login}
           onChange={(e) => setUser({ ...user, login: e.target.value })}
-        />
+        /> */}
       </div>
       <div className="flex flex-wrap justify-center">
         {/* RestaurantCard(restaurants[0]) */}

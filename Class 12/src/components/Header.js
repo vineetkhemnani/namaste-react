@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
-import Logo from '../assets/img/the-eatery-logo.png'
-import UserContext from '../utils/userContext'
-import useOnline from '../utils/useOnline'
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Logo from '../assets/img/the-eatery-logo.png';
+import UserContext from '../utils/userContext';
+import useOnline from '../utils/useOnline';
+import { useSelector } from 'react-redux';
 
 const Title = () => (
   <a href="/">
@@ -18,6 +19,8 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const isOnline = useOnline()
   const { user } = useContext(UserContext)
+
+  const cartItems = useSelector(store => store.cart.items);
   return (
     <div className="flex justify-between bg-[#c4fbfb] shadow-lg">
       <Title />
@@ -35,7 +38,7 @@ const Header = () => {
           <li className="px-2">
             <Link to="/Instamart">Instamart</Link>
           </li>
-          <li className="px-2">Cart</li>
+          <li className="px-2">Cart - {cartItems.length} items</li>
         </ul>
       </div>
       <h1>{isOnline ? '✅' : '🔴'}</h1>

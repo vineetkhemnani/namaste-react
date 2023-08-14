@@ -12,6 +12,8 @@ import RestaurantMenu from './components/RestaurantMenu';
 import Profile from './components/Profile';
 import Shimmer from './components/Shimmer';
 import UserContext from './utils/userContext';
+import { Provider } from 'react-redux';
+import store from './utils/store';
 
 
 const Instamart = lazy(()=> import('./components/Instamart'));
@@ -29,7 +31,8 @@ const AppLayout = () => {
     setUser(json);
   }
   return (
-    <>
+    <Provider store={store}>
+      {/* provide store to entire app */}
       <UserContext.Provider value={{
         user: user,
         setUser: setUser
@@ -40,7 +43,7 @@ const AppLayout = () => {
         <Outlet />
         <Footer />
       </UserContext.Provider>
-    </>
+    </Provider>
   )
 }
 

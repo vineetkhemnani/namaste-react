@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { IMAGE_CDN_URL } from '../constants'
 import Shimmer from './Shimmer'
 import useRestaurant from '../utils/useRestaurant'
+import cartSlice, { addItem, removeItem } from '../utils/cartSlice'
+import { useDispatch } from 'react-redux'
 
 const RestaurantMenu = () => {
   const params = useParams()
@@ -11,6 +13,15 @@ const RestaurantMenu = () => {
 
   const restaurant = useRestaurant(id)[0];
   const restaurantMenu = useRestaurant(id)[1];
+  
+  const dispatch = useDispatch();
+  const handleAddItem = () => {
+    dispatch(addItem('Grapes'));
+  }
+  const handleRemoveItem = () => {
+    dispatch(removeItem('Grapes'));
+
+  }
   
   return !restaurant ? (
     <Shimmer />
@@ -28,22 +39,28 @@ const RestaurantMenu = () => {
         <div
           className={
             restaurant?.avgRating < 4
-              ? (restaurant?.avgRating < 3
+              ? restaurant?.avgRating < 3
                 ? 'bg-red-500 rounded inline-block p-1'
-                : 'bg-orange-500 rounded inline-block p-1')
+                : 'bg-orange-500 rounded inline-block p-1'
               : 'bg-green-500 rounded inline-block p-1'
           }
         >
-          {restaurant?.avgRating}  stars
+          {restaurant?.avgRating} stars
         </div>
         <h3>{restaurant?.costForTwoMessage}</h3>
+        <button className='bg-blue-500 p-1 m-1' onClick={()=>handleAddItem()}>Add</button>
+        <button className='bg-red-500 p-1 m-1' onClick={()=>handleRemoveItem()}>Remove</button>
+
       </div>
       <div className="ml-10">
         <h1 className="font-bold text-xl">Menu</h1>
         <ul>
           {restaurantMenu.map((item) => (
-            <li className="box-border" key={item?.card?.info?.id}>
-              {item?.card?.info?.name}
+            <li key={item?.card?.info?.id}>
+              <div className="border rounded-md shadow-md bg-slate-200 w-96 m-5 p-5 flex justify-between">
+                <p>{item?.card?.info?.name}</p>
+                <button className='rounded bg-green-200 p-1'>Add Item</button>
+              </div>
             </li>
           ))}
         </ul>
