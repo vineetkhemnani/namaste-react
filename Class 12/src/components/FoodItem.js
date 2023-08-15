@@ -6,7 +6,10 @@ const FoodItem = ({name,price,description,imageId}) => {
         <div className="p-2 m-2 shadow-md bg-purple-50 rounded-lg flex">
           <img className="w-32" src={IMAGE_CDN_URL + imageId} alt="" />
           <div className="ml-4">
+            <div>
             <h2 className="text-xl font-bold">{name}</h2>
+            <button className="bg-red-300 rounded p-1">Remove</button>
+            </div>
             <h3>{description}</h3>
             <h4>{!price ? ' ' : 'Rs. ' + price / 100}</h4>
           </div>
