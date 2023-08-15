@@ -15,13 +15,16 @@ const RestaurantMenu = () => {
   const restaurantMenu = useRestaurant(id)[1];
   
   const dispatch = useDispatch();
-  const handleAddItem = () => {
-    dispatch(addItem('Grapes'));
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
   }
-  const handleRemoveItem = () => {
-    dispatch(removeItem('Grapes'));
+  // const handleAddItem = () => {
+  //   dispatch(addItem('Grapes'));
+  // }
+  // const handleRemoveItem = () => {
+  //   dispatch(removeItem('Grapes'));
 
-  }
+  // }
   
   return !restaurant ? (
     <Shimmer />
@@ -48,8 +51,8 @@ const RestaurantMenu = () => {
           {restaurant?.avgRating} stars
         </div>
         <h3>{restaurant?.costForTwoMessage}</h3>
-        <button className='bg-blue-500 p-1 m-1' onClick={()=>handleAddItem()}>Add</button>
-        <button className='bg-red-500 p-1 m-1' onClick={()=>handleRemoveItem()}>Remove</button>
+        {/* <button className='bg-blue-500 p-1 m-1' onClick={()=>handleAddItem()}>Add</button>
+        <button className='bg-red-500 p-1 m-1' onClick={()=>handleRemoveItem()}>Remove</button> */}
 
       </div>
       <div className="ml-10">
@@ -59,7 +62,7 @@ const RestaurantMenu = () => {
             <li key={item?.card?.info?.id}>
               <div className="border rounded-md shadow-md bg-slate-200 w-96 m-5 p-5 flex justify-between">
                 <p>{item?.card?.info?.name}</p>
-                <button className='rounded bg-green-200 p-1'>Add Item</button>
+                <button className='rounded bg-green-200 p-1' onClick={()=>addFoodItem(item?.card?.info)}>Add Item</button>
               </div>
             </li>
           ))}

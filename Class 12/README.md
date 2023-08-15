@@ -172,3 +172,23 @@ const handleAddItem = () => {
 ```
 
 - handleAddItem function is triggered when add button is clicked
+
+## Building our cart
+- Only subscribe to what is needed
+```
+import { useSelector } from "react-redux"
+
+const Cart = () => {
+  const cartItems = useSelector(store=> store.cart.items)
+
+  return (
+    <div>
+        <h1 className="font-bold text-3xl">Cart Items - {cartItems.length}</h1>
+    </div>
+  )
+}
+export default Cart
+```
+
+- if instead of ```store => store.cart.items``` we do ```store => store``` it becomes a major performance issue
+- Everytime our store changes, it will re render the component so we need only a small part of slice to be our dependency
