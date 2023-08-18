@@ -84,7 +84,9 @@ const Body = () => {
           onChange={(e) => setUser({ ...user, login: e.target.value })}
         /> */}
       </div>
-      <div className="flex flex-wrap justify-center">
+        {(filteredRestaurants.length) === 0 ?
+        <h1 className="font-bold text-3xl">No restaurants match your filter</h1> :
+        <div className="flex flex-wrap justify-center">
         {/* RestaurantCard(restaurants[0]) */}
         {filteredRestaurants.map((restaurant) => {
           return (
@@ -97,6 +99,7 @@ const Body = () => {
           )
         })}
       </div>
+}
     </>
   )
 }
