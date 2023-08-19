@@ -19,8 +19,10 @@
 - Jest is a delightful Javascript Testing Framework with a focus on simplicity
 
 ## Installing react-testing-library and jest
-```npm install --save-dev @testing-library/react```
-```npm i -D jest```
+```
+npm install --save-dev @testing-library/react
+npm i -D jest
+```
 
 ## Configuring jest
 - Executing jest --init once to create a jest config file
@@ -117,6 +119,16 @@ so we add a jest config called **moduleNameMapper{}**
       </StaticRouter>
     )
   ```
+
+- Now we check elements inside Header component for example:- logo by testId
+  ```
+  const logo = header.getAllByTestId("logo");
+  ```
+  and pass **data-testid="logo"** to the logo image element inside the main Header component
+```
+const logo = header.getAllByTestId("logo");
+    expect(logo[0].src).toBe('http://localhost/dummy.png')
+```
   
 2. Expect cart items to be 0
 3. Default status should be Online

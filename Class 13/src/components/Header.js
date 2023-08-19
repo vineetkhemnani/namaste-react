@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const Title = () => (
   <a href="/">
-    <img className="h-28 px-2" src={Logo} alt="" />
+    <img data-testid="logo" className="h-28 px-2" src={Logo} alt="" />
   </a>
 )
 function loggedInUser() {
