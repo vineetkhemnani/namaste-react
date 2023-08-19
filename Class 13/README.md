@@ -88,9 +88,11 @@ test("Check sum of 2 numbers",() => {
 ```
 - Now we get image not supported or not recognized
 so we add a jest config called **moduleNameMapper{}**
-```moduleNameMapper: {
+  ```
+  moduleNameMapper: {
     "\\.(jpg|png|svg)$": "./mocks/dummyLogo.js"
-  },```
+  },
+  ```
 
 - Now it cant find react-redux and Provider needed as we are in our small container jsdom and it does not know about AppLayout, Body etc
   So we wrap it in a Provider and provide store object as prop
