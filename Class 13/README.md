@@ -103,9 +103,20 @@ so we add a jest config called **moduleNameMapper{}**
       </Provider>
     )
   ```
+  
 
 - Another error as Router is not configured (we used createBrowserRouter in React)
   We need to StaticRouter here using ```import {StaticRouter} from 'react-router-dom/server';```
+  - The **StaticRouter** can work without browser
+  ```
+  const header = render(
+      <StaticRouter>
+      <Provider store={store}>
+        <Header />
+      </Provider>
+      </StaticRouter>
+    )
+  ```
   
 2. Expect cart items to be 0
 3. Default status should be Online
