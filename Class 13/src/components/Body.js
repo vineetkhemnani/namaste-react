@@ -84,6 +84,7 @@ const Body = () => {
           onChange={(e) => setUser({ ...user, login: e.target.value })}
         /> */}
       </div>
+      {/* conditional rendering */}
         {(filteredRestaurants.length) === 0 ?
         <h1 className="font-bold text-3xl">No restaurants match your filter</h1> :
         <div className="flex flex-wrap justify-center">

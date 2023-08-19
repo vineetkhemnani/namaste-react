@@ -1,194 +1,109 @@
-# Redux
-- used for data management
+# Test cases for React
 
-## Cons
-- It is complex to set up
-- Huge learning curve
-- complicated
-- copy paste code required
-- only useful for large scale applications (not for small apps)
+## React Testing Library
+- New way of writing react
+- build on top of **jest** (uses jest behind the scenes)
+- adding new features doesnt break the existing ones
+- replacement for enzyme
 
-**Redux toolkit came into being to solve this**
+## Types of Testing
+- manual testing
+- automated testing - code to test code (selenium)
+- end to end testing - stimulates a user's activities (cyprus)
+                     - covers entire user's journey
+                     - uses a headless browser - faster because it does not have to paint anything on the viewport but it will have everything else i.e. diff algorithm, virtual DOM, reconciliation
+- unit testing - testing a part of code whether card/component is loading or not
+- integration testing - testing integration between components
 
-# Redux Toolkit
-## Redux Store
-- At the end of the day, Redux Store is a big object
-- It is similar to a context but larger in size
-- It can have various data divided into slices
-- A slice is a small portion of our store
-- **Our components CANNOT directly modify the store**
-- we will have to dispatch an action
-- Suppose we click the + button => we have dispatched an action called **addItem** which calls a function and this function will modify our cart (a slice of our store)
-![redux store basics](https://github.com/vineetkhemnani/namaste-react/assets/78949423/e014260a-7d97-4570-b331-0e35b615455a)
-- This function is known as **REDUCER**
-- The + button dispatches an action called addItem that calls a function called Reducer that modifies a slice of our redux store
-- If we have to call cart, we use **SELECTOR**
-- This selector (read data) will contain the information that will update the cart
-![selector and reducer in redux](https://github.com/vineetkhemnani/namaste-react/assets/78949423/e1b9ddbb-8ab7-417d-ad13-b3a790c821c2)
-- **SELECTOR** - it means we are selecting a slice of the store
-- At the end of the day, **SELECTOR** is a **HOOK** Which is a ***FUNCTION*** at the end of the day
-- When we use selector to automatically change cart when slice in the store is changed, it is known as **SUBSCRIBING TO OUR STORE**
-- Whenever our cart slice is modified in the store, it will automatically modify in the UI
-![complete redux description](https://github.com/vineetkhemnani/namaste-react/assets/78949423/7c77de6d-3680-49c9-83ef-d272ba5c21ec)
+## Jest
+- Jest is a delightful Javascript Testing Framework with a focus on simplicity
 
-## Installing Redux toolkit
+## Installing react-testing-library and jest
+```npm install --save-dev @testing-library/react```
+```npm i -D jest```
+
+## Configuring jest
+- Executing jest --init once to create a jest config file
+```npx jest --init```
+- It will ask us certain questions
+- We wont use Typescript so no for typescript
+- Test environment - jsdom (browser-like)
+- Add coverage reports - Yes
+- Provider to instrument code for coverage- babel
+- Automatically clear mock calls, instances, contexts and results before every test? - Yes
+
+- ***jest.config.js is created***
+
+## Run test cases
+- in package.json, we set up our test command
+  test: "jest"
+  so we can simply do ```npm run test```
+- We get this error ***jest-environment-jsdom no longer shipped***
+  fix by installing ```npm i -D jest-environment-jsdom```
+- Now the command works but no test cases checked as it checks the ***__tests__*** folder
+
+## Create our first test
+- Create a folder **__tests__**
+- Convention - filename.test.js
+- jest now tracks all the files with *.test.js* as test case files
+- sum.test.js works as a test case file for sum.js
+- Writing test cases
 ```
-npm install @reduxjs/toolkit
-npm install react-redux
+test("Check sum of 2 numbers",() => {
+  expect(sum(2,5)).toBe(7);
+})
 ```
-- **redux** (@reduxjs/toolkit) core's job is to maintain the data store (maintain the slices)
-- **react-redux** is the bridge between react and redux
+- Inside test(), we expecct a string and a function
+- Inside the function, we expect something
+  Here we are expecting this to call our sum function with (2,5) as parameters and return 7
 
-## Configure store
-```
-import { configureStore } from '@reduxjs/toolkit'
+- We run into an error  **SyntaxError: Cannot use import statement outside a module**
+- We take the help of babel to resolve this (search babel jest config)
+- Install ```npm install --save-dev babel-jest @babel/core @babel/preset-env```
+- Configure babel.config.js or .babelrc
+```"presets": [["@babel/preset-env", { "targets": { "node": "current" } }]]```
+- .babelrc takes a JSON
+- the test cases run in browser like test-Environment called **jsdom**
+- JSdom is like a small machine which is running our code
+- coverage report is generated in coverage folder
 
-const store = configureStore({
+## Writing Test Cases for Header
+1. Expect Header to be loaded
+  in Jsdom, we dont have a root to do root.render() so instead we use ***render() from react-testing-library***
+  ```import { render } from '@testing-library/react';```
+  ```
+  test("check if header is getting rendered", () => {
+    const heading = render(<Heading/>);
+  })
+  ``` 
+  - Trying to render heading we get jsx not supported, so we need another library in presets in .babelrc
+    - ```npm i -D @babel/preset-react```
+  ```
+  {
+  "presets": [
+    ["@babel/preset-env", { "targets": { "node": "current" } }],
+    ["@babel/preset-react", {"runtime": "automatic"}]
+  ]
+}
+```
+- Now we get image not supported or not recognized
+so we add a jest config called **moduleNameMapper{}**
+```moduleNameMapper: {
+    "\\.(jpg|png|svg)$": "./mocks/dummyLogo.js"
+  },```
 
-});
-```
-- The store configuration will contain slices
-
-## Provide store
-Go to App.js
-```
-import { Provider } from 'react-redux';
-import store from './utils/store';
-```
-
-```
-return (
-    <Provider store={store}>
-      <!-- provide store to entire app -->
-      <UserContext.Provider value={{
-        user: user,
-        setUser: setUser
-      }}>
+- Now it cant find react-redux and Provider needed as we are in our small container jsdom and it does not know about AppLayout, Body etc
+  So we wrap it in a Provider and provide store object as prop
+  ```
+  const header = render(
+      <Provider store={store}>
         <Header />
-        {/* Place where I want to render random things ex:- Body, About , Contact us */}
-        {/* {Outlet} */}
-        <Outlet />
-        <Footer />
-      </UserContext.Provider>
-    </Provider>
-  )
-```
+      </Provider>
+    )
+  ```
 
-## Creating a slice
-```
-import { createSlice } from "@reduxjs/toolkit";
-
-const cartSlice = createSlice({
-    name: 'cart',
-    initialState: {
-        items: [],
-    }
-})
-```
-
-## Adding Reducer function
-```
-const cartSlice = createSlice({
-    name: 'cart',
-    initialState: {
-        items: [],
-    },
-    reducers: {
-        addItem: (state, action) => {
-
-        }
-    }
-})
-```
-- Here addItem is the action which calls an anonymous function (state, action) => { }
-- action is the place where we will get the items to be added to our cart
-- action contains the payload
-- state is our initial state
-- So we need to push actions.payload into our initial state
-
-```
-reducers: {
-  addItem: (state, action) => {
-    state.items.push(action.payload)
-  }
-}
-```
-
-- state represents the **PREVIOUS state** for now it is the initial state
--adding a **clearCart reducer** and **removeItem**
-```
-reducers: {
-    // state represents the previous state
-    addItem: (state, action) => {
-      state.items.push(action.payload);
-      },
-      clearCart: (state, action)=>{
-        state.items = []
-        },
-    },
-```
-
-## Export actions and reducers from this slice
-```export default cartSlice.reducer;```
-- combines all the reducers from cartSlice and export it as one single reducer
-
-```export const { addItem, removeItem, clearCart} = cartSlice.actions;```
-- exports the actions
-
-## Put that Slice into store
-```
-import cartSlice from './cartSlice';
-
-const store = configureStore({
-    reducer: {
-        cart: cartSlice,
-        
-    }
-});
-```
-
-## Using slice into our Cart / subscribing to our store
-```
-import { useSelector } from 'react-redux';
-
-{* (inside header component) *}
-const cartItems = useSelector(store=> store.cart.items);
-```
-
-## Dispatching actions onClick event
-```
-import { useDispatch } from 'react-redux;
-const dispatch = useDispatch();
-```
-- import **useDispatch** hook from **react-redux**
-```
-import { addItem } from '../utils/cartSlice';
-```
-- import addItem action from cartSlice as a named import
-```
-const handleAddItem = () => {
-    dispatch(addItem('Grapes'));
-  }
-```
-
-- handleAddItem function is triggered when add button is clicked
-
-## Building our cart
-- Only subscribe to what is needed
-```
-import { useSelector } from "react-redux"
-
-const Cart = () => {
-  const cartItems = useSelector(store=> store.cart.items)
-
-  return (
-    <div>
-        <h1 className="font-bold text-3xl">Cart Items - {cartItems.length}</h1>
-    </div>
-  )
-}
-export default Cart
-```
-
-- if instead of ```store => store.cart.items``` we do ```store => store``` it becomes a major performance issue
-- Everytime our store changes, it will re render the component so we need only a small part of slice to be our dependency
+- Another error as Router is not configured (we used createBrowserRouter in React)
+  We need to StaticRouter here using ```import {StaticRouter} from 'react-router-dom/server';```
+  
+2. Expect cart items to be 0
+3. Default status should be Online
