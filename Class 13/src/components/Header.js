@@ -40,12 +40,12 @@ const Header = () => {
           <li className="px-2">
             <Link to="/Instamart">Instamart</Link>
           </li>
-          <li className="px-2">
+          <li data-testid="cart" className="px-2">
             <Link to="/Cart">Cart - {cartItems.length} items</Link>
           </li>
         </ul>
       </div>
-      <h1>{isOnline ? '✅' : '🔴'}</h1>
+      <h1 data-testid="online-status">{isOnline ? '✅' : '🔴'}</h1>
       <div>
         <span className="p-10 font-bold text-blue-600">{user.name}</span>
 

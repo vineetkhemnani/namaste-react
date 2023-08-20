@@ -86,17 +86,16 @@ test("Check sum of 2 numbers",() => {
     ["@babel/preset-env", { "targets": { "node": "current" } }],
     ["@babel/preset-react", {"runtime": "automatic"}]
   ]
-}
-```
-- Now we get image not supported or not recognized
-so we add a jest config called **moduleNameMapper{}**
+  }
+  ```
+  - Now we get image not supported or not recognized so we add a jest config called **moduleNameMapper{}**
   ```
   moduleNameMapper: {
     "\\.(jpg|png|svg)$": "./mocks/dummyLogo.js"
   },
   ```
 
-- Now it cant find react-redux and Provider needed as we are in our small container jsdom and it does not know about AppLayout, Body etc
+  - Now it cant find react-redux and Provider needed as we are in our small container jsdom and it does not know about AppLayout, Body etc
   So we wrap it in a Provider and provide store object as prop
   ```
   const header = render(
@@ -107,7 +106,7 @@ so we add a jest config called **moduleNameMapper{}**
   ```
   
 
-- Another error as Router is not configured (we used createBrowserRouter in React)
+  - Another error as Router is not configured (we used createBrowserRouter in React)
   We need to StaticRouter here using ```import {StaticRouter} from 'react-router-dom/server';```
   - The **StaticRouter** can work without browser
   ```
@@ -120,15 +119,46 @@ so we add a jest config called **moduleNameMapper{}**
     )
   ```
 
-- Now we check elements inside Header component for example:- logo by testId
+  - Now we check elements inside Header component for example:- logo by testId
   ```
   const logo = header.getAllByTestId("logo");
   ```
   and pass **data-testid="logo"** to the logo image element inside the main Header component
-```
-const logo = header.getAllByTestId("logo");
-    expect(logo[0].src).toBe('http://localhost/dummy.png')
-```
+  ```
+  const logo = header.getAllByTestId("logo");
+  expect(logo[0].src).toBe('http://localhost/dummy.png')
+  ```
+  - getAllByTestId() returns an array whereas getByTestId() returns an element
   
-2. Expect cart items to be 0
-3. Default status should be Online
+2. Default status should be Online
+  ```
+  test("Online status should be green on rendering header", () => {
+    // load header
+    const header = render(
+      <StaticRouter>
+        <Provider store={store}>
+          <Header />
+        </Provider>
+      </StaticRouter>
+    )
+    const onlineStatus = header.getByTestId("online-status");
+    expect(onlineStatus.innerHTML).toBe('✅');
+  })
+  ```
+
+3. Expect cart items to be 0
+  ```
+  test("Cart should be empty on rendering header", () => {
+    // load header
+    const header = render(
+      <StaticRouter>
+        <Provider store={store}>
+          <Header />
+        </Provider>
+      </StaticRouter>
+    )
+    const cart = header.getByTestId("cart");
+    // check if status is green
+    expect(cart.innerHTML).toBe('<a href="/Cart">Cart - 0 items</a>')
+})
+  ```
