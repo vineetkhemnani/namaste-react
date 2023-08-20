@@ -160,5 +160,82 @@ test("Check sum of 2 numbers",() => {
     const cart = header.getByTestId("cart");
     // check if status is green
     expect(cart.innerHTML).toBe('<a href="/Cart">Cart - 0 items</a>')
-})
+  })
   ```
+## Integration Testing for Shimmer
+```
+test('Shimmer should load on homepage', () => {
+  const body = render(
+    <StaticRouter>
+      <Provider store={store}>
+        <Body />
+      </Provider>
+    </StaticRouter>
+  )
+  const shimmer = body.getByTestId('shimmer')
+  //   console.log(shimmer);
+  expect(shimmer).toBeInTheDocument()
+})
+```
+- toBeInTheDocument() is imported from another library called **@testing-library/jest-dom**
+- ```npm i -D @testing-library/jest-dom```
+- toBeInTheDocument() is not a good way to test code
+## Integration Testing for Search functionality
+```
+import { render } from '@testing-library/react';
+import Body from '../Body';
+import { Provider } from 'react-redux';
+import store from '../../utils/store';
+import {StaticRouter} from 'react-router-dom/server';
+
+test("Search results on homepage", () => {
+const body = render(
+  <StaticRouter>
+    <Provider store={store}>
+      <Body />
+    </Provider>
+  </StaticRouter>
+)
+})
+```
+
+- Console throws an error that **fetch is not defined**
+- It happens because fetch is a **Browser API** and testing library/jsdom doesnt understand it
+- So we will create a ***mock of fetch*** using a jest function called ***jest.fn()***
+- Fetch gives us a promise in the form of a readable stream and we convert it to JSON
+- Mocking our fetch
+```
+global.fetch = jest.fn(() => {
+  return Promise.resolve({
+    json: () => {
+      return Promise.resolve(RESTAURANT_DATA)
+    },
+  })
+})
+```
+
+- **waitFor()** - takes a callback as an arguement which expects something
+- **Firing events** - fireEvent.click etc
+- **check add items to cart functionality**
+```
+test('Add Items to cart', async () => {
+  const body = render(
+    <StaticRouter>
+      <Provider store={store}>
+        <Header />
+        <RestaurantMenu />
+      </Provider>
+    </StaticRouter>
+  )
+
+  await waitFor(() => expect(body.getByTestId('menu')))
+  // ul serves as menu
+  const menu = body.getByTestId('menu')
+  //   console.log(menu.children.length)
+  const addBtn = body.getAllByTestId('add-btn')
+  fireEvent.click(addBtn[0])
+  const cart = body.getByTestId('cart')
+  expect(cart.innerHTML).toBe('<a href="/Cart">Cart - 1 items</a>')
+})
+```
+- ```import { fireEvent, render, waitFor } from '@testing-library/react'```

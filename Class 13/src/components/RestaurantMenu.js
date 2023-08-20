@@ -53,16 +53,22 @@ const RestaurantMenu = () => {
         <h3>{restaurant?.costForTwoMessage}</h3>
         {/* <button className='bg-blue-500 p-1 m-1' onClick={()=>handleAddItem()}>Add</button>
         <button className='bg-red-500 p-1 m-1' onClick={()=>handleRemoveItem()}>Remove</button> */}
-
       </div>
       <div className="ml-10">
         <h1 className="font-bold text-xl">Menu</h1>
-        <ul>
+        <ul data-testid="menu">
           {restaurantMenu.map((item) => (
             <li key={item?.card?.info?.id}>
               <div className="border rounded-md shadow-md bg-slate-200 w-96 m-5 p-5 flex justify-between">
                 <p>{item?.card?.info?.name}</p>
-                <button className='rounded bg-green-200 p-1' onClick={()=>addFoodItem(item?.card?.info)}>Add Item</button>
+                <p>Rs. {item?.card?.info?.price / 100}</p>
+                <button
+                data-testid="add-btn"
+                  className="rounded bg-green-200 p-1"
+                  onClick={() => addFoodItem(item?.card?.info)}
+                >
+                  Add Item
+                </button>
               </div>
             </li>
           ))}

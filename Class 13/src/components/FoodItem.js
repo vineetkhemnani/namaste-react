@@ -3,7 +3,8 @@ import { IMAGE_CDN_URL } from "../constants"
 import { removeItem } from "../utils/cartSlice";
 
 const FoodItem = (item) => {
-    const {name,price,description,imageId} = item;
+    const {name,price,description,imageId, defaultPrice} = item;
+    // console.log(item);
       const dispatch = useDispatch();
       const handleRemoveItem = (item) => {
         dispatch(removeItem(item));
@@ -18,7 +19,7 @@ const FoodItem = (item) => {
             <button className="bg-red-300 rounded p-1" onClick={()=>{handleRemoveItem(item)}}>Remove</button>
             </div>
             <h3>{description}</h3>
-            <h4>{!price ? ' ' : 'Rs. ' + price / 100}</h4>
+            <h4>{!price ? 'Rs. '+ defaultPrice/100 + '/kg' : 'Rs. ' + price / 100}</h4>
           </div>
         </div>
       </>
